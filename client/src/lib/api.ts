@@ -9,18 +9,67 @@ const api = axios.create({
   },
 });
 
+export interface Room {
+  roomId: string;
+  displayName: string;
+  roomType: "audio" | "video";
+  expiresAt: string | null;
+  roomUrl?: string;
+}
+
+export interface CreateRoomResponse {
+  success: boolean;
+  room: Room;
+}
+
+export interface RoomDetailsResponse {
+  success: boolean;
+  room: Room;
+}
+
 export interface CallTokenResponse {
   token: string;
   url: string;
-  roomName: string;
+  roomId: string;
+  displayName: string;
   participantName: string;
 }
 
-export const getCallToken = async (roomName: string, participantName: string): Promise<CallTokenResponse> => {
+// Create a new room
+export const createRoom = async (
+  displayName: string,
+  roomType: "audio" | "video",
+  expiryHours?: number
+): Promise<CreateRoomResponse> => {
+  const response = await api.post<CreateRoomResponse>("/call/create-room", {
+    displayName,
+    roomType,
+    expiryHours,
+  });
+  return response.data;
+};
+
+// Get room details
+export const getRoomDetails = async (roomId: string): Promise<RoomDetailsResponse> => {
+  const response = await api.get<RoomDetailsResponse>(`/call/room/${roomId}`);
+  return response.data;
+};
+
+// Generate token to join a room
+export const getCallToken = async (
+  roomId: string,
+  participantName: string
+): Promise<CallTokenResponse> => {
   const response = await api.post<CallTokenResponse>("/call/token", {
-    roomName,
+    roomId,
     participantName,
   });
+  return response.data;
+};
+
+// End a room
+export const endRoom = async (roomId: string) => {
+  const response = await api.post(`/call/end-room/${roomId}`);
   return response.data;
 };
 
