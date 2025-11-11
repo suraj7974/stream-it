@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Model for storing call room metadata
+model CallRoom {
+  id            String   @id @default(uuid())
+  roomName      String   @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isActive      Boolean  @default(true)
+  participants  Int      @default(0)
+  
+  @@map("call_rooms")
+}
+
+// Model for storing participant history (optional for analytics)
+model Participant {
+  id              String   @id @default(uuid())
+  name            String
+  roomId          String
+  joinedAt        DateTime @default(now())
+  leftAt          DateTime?
+  
+  @@map("participants")
+}
