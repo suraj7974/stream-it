@@ -1,0 +1,35 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: streamit-postgres
+    environment:
+      POSTGRES_USER: streamit
+      POSTGRES_PASSWORD: streamit
+      POSTGRES_DB: streamit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U streamit"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # LiveKit Server
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: streamit-livekit
+    ports:
+      - "7880:7880"    # WebRTC
+      - "7881:7881"    # HTTP
+      - "7882:7882/udp" # TURN/UDP
+    environment:
+      LIVEKIT_KEYS: "devkey: secret"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    driver: local
