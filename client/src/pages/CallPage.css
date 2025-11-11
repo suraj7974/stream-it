@@ -1,206 +1,373 @@
-.join-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-}
-
-.join-card {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 3rem;
-  max-width: 500px;
-  width: 100%;
-}
-
-.join-card h1 {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+/* Common styles for Audio and Video Call Pages */
 
 .call-page {
-  padding: 1rem;
+  min-height: 100vh;
+  background: #020617;
+  padding-top: 80px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.call-container {
+  max-width: 1536px;
+  margin: 0 auto;
 }
 
 .call-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
+  margin-bottom: 32px;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(16px);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.call-header.audio {
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.call-header.video {
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.call-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.call-header .icon {
+  font-size: 32px;
+}
+
+.call-header .room-name {
+  color: #22d3ee;
+}
+
+.call-header.video .room-name {
+  color: #f97316;
 }
 
 .leave-button {
-  background: #dc3545;
+  background: #ef4444;
+  color: white;
+  font-weight: 600;
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .leave-button:hover {
-  background: #c82333;
+  background: #dc2626;
 }
 
-.livekit-room {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 12px;
-  min-height: 500px;
-  padding: 1rem;
+/* Join Page */
+.join-page {
+  min-height: 100vh;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  padding-top: 80px;
 }
 
+.join-card {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 48px;
+  width: 100%;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.join-card.audio {
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.join-card.video {
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.join-card h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.mode-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mode-button {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 600;
+  padding: 16px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+}
+
+.mode-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form input::placeholder {
+  color: #9ca3af;
+}
+
+.form button {
+  width: 100%;
+  font-weight: 600;
+  padding: 14px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+}
+
+.form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Audio call buttons */
+.join-card.audio .form button:not(.secondary-button) {
+  background: linear-gradient(to right, #22d3ee, #06b6d4);
+  color: white;
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+}
+
+.join-card.audio .form button:not(.secondary-button):hover:not(:disabled) {
+  background: linear-gradient(to right, #06b6d4, #0891b2);
+  box-shadow: 0 15px 40px rgba(34, 211, 238, 0.4);
+}
+
+/* Video call buttons */
+.join-card.video .form button:not(.secondary-button) {
+  background: linear-gradient(to right, #f97316, #ea580c);
+  color: white;
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+}
+
+.join-card.video .form button:not(.secondary-button):hover:not(:disabled) {
+  background: linear-gradient(to right, #ea580c, #c2410c);
+  box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.room-created {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.success-message {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+}
+
+.room-link-container {
+  display: flex;
+  gap: 8px;
+}
+
+.room-link-input {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+}
+
+.copy-button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  font-weight: 600;
+  padding: 12px 20px !important;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  box-shadow: none !important;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.info-text {
+  color: #9ca3af;
+  text-align: center;
+  font-size: 14px;
+}
+
+.room-name-display {
+  color: #22d3ee;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.join-card.video .room-name-display {
+  color: #f97316;
+}
+
+/* Participants */
 .participants {
-  padding: 2rem;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
 }
 
 .participants h3 {
-  margin-bottom: 1.5rem;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
 .participant-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
+  gap: 16px;
 }
 
 .participant-card {
-  background: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
   text-align: center;
+  transition: all 0.3s;
+}
+
+.participant-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
 }
 
 .participant-avatar {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #22d3ee, #06b6d4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  margin: 0 auto 12px;
+  font-size: 24px;
   font-weight: bold;
-  margin: 0 auto 1rem;
+  color: white;
 }
 
 .participant-card p {
-  margin-bottom: 0.5rem;
+  color: white;
   font-weight: 500;
+  margin-bottom: 8px;
 }
 
 .audio-indicator {
-  font-size: 1.2rem;
+  font-size: 20px;
 }
 
 /* LiveKit Component Overrides */
+.livekit-room {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: 12px;
+  min-height: 500px;
+  padding: 16px;
+}
+
 .video-call .livekit-room {
   height: 70vh;
+  border-color: rgba(249, 115, 22, 0.3);
 }
 
-/* Mode Selection */
-.mode-selection {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.mode-button {
-  padding: 1.5rem;
-  font-size: 1.1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.mode-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.secondary-button {
-  background: #444 !important;
-  margin-top: 0.5rem;
-}
-
-.secondary-button:hover {
-  background: #555 !important;
-}
-
-/* Room Created Success */
-.room-created {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.success-message {
-  color: #4caf50;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 0;
-}
-
-.room-link-container {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.room-link-input {
-  flex: 1;
-  padding: 0.8rem;
-  background: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 6px;
-  color: #fff;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-}
-
-.copy-button {
-  background: #4caf50 !important;
-  white-space: nowrap;
-  padding: 0.8rem 1.2rem;
-}
-
-.copy-button:hover {
-  background: #45a049 !important;
-}
-
-.info-text {
-  text-align: center;
-  color: #888;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.room-name-display {
-  text-align: center;
-  color: #667eea;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-button:disabled:hover {
-  transform: none;
-  box-shadow: none;
+/* Responsive */
+@media (max-width: 768px) {
+  .call-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .join-card {
+    padding: 32px 24px;
+  }
+  
+  .join-card h1 {
+    font-size: 28px;
+  }
 }

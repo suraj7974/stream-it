@@ -123,24 +123,29 @@ function AudioCallPage() {
   if (connected && token) {
     return (
       <div className="call-page">
-        <div className="call-header">
-          <h2>🎤 Audio Call: {currentRoomName}</h2>
-          <button onClick={handleLeaveRoom} className="leave-button">
-            Leave Room
-          </button>
-        </div>
+        <div className="call-container">
+          <div className="call-header audio">
+            <h2>
+              <span className="icon">🎤</span>
+              Audio Call: <span className="room-name">{currentRoomName}</span>
+            </h2>
+            <button onClick={handleLeaveRoom} className="leave-button">
+              Leave Room
+            </button>
+          </div>
 
-        <LiveKitRoom
-          token={token}
-          serverUrl={import.meta.env.VITE_LIVEKIT_URL || 'ws://localhost:7880'}
-          connect={true}
-          audio={true}
-          video={false}
-          className="livekit-room"
-        >
-          <ParticipantList />
-          <RoomAudioRenderer />
-        </LiveKitRoom>
+          <LiveKitRoom
+            token={token}
+            serverUrl={import.meta.env.VITE_LIVEKIT_URL || 'ws://localhost:7880'}
+            connect={true}
+            audio={true}
+            video={false}
+            className="livekit-room"
+          >
+            <ParticipantList />
+            <RoomAudioRenderer />
+          </LiveKitRoom>
+        </div>
       </div>
     )
   }
@@ -149,7 +154,7 @@ function AudioCallPage() {
   if (mode === 'select') {
     return (
       <div className="join-page">
-        <div className="join-card">
+        <div className="join-card audio">
           <h1>🎤 Audio Call</h1>
           <div className="mode-selection">
             <button onClick={() => setMode('create')} className="mode-button">
@@ -168,7 +173,7 @@ function AudioCallPage() {
   if (mode === 'create') {
     return (
       <div className="join-page">
-        <div className="join-card">
+        <div className="join-card audio">
           <h1>🎤 Create Audio Room</h1>
           
           {!roomUrl ? (
@@ -223,7 +228,7 @@ function AudioCallPage() {
   // Join room mode
   return (
     <div className="join-page">
-      <div className="join-card">
+      <div className="join-card audio">
         <h1>🎤 Join Audio Call</h1>
         {currentRoomName && <p className="room-name-display">Room: {currentRoomName}</p>}
         <div className="form">

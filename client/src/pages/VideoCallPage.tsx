@@ -127,24 +127,29 @@ function VideoCallPage() {
   if (connected && token) {
     return (
       <div className="call-page video-call">
-        <div className="call-header">
-          <h2>📹 Video Call: {currentRoomName}</h2>
-          <button onClick={handleLeaveRoom} className="leave-button">
-            Leave Room
-          </button>
-        </div>
+        <div className="call-container">
+          <div className="call-header video">
+            <h2>
+              <span className="icon">📹</span>
+              Video Call: <span className="room-name">{currentRoomName}</span>
+            </h2>
+            <button onClick={handleLeaveRoom} className="leave-button">
+              Leave Room
+            </button>
+          </div>
 
-        <LiveKitRoom
-          token={token}
-          serverUrl={import.meta.env.VITE_LIVEKIT_URL || 'ws://localhost:7880'}
-          connect={true}
-          audio={true}
-          video={true}
-          className="livekit-room"
-        >
-          <VideoConference />
-          <RoomAudioRenderer />
-        </LiveKitRoom>
+          <LiveKitRoom
+            token={token}
+            serverUrl={import.meta.env.VITE_LIVEKIT_URL || 'ws://localhost:7880'}
+            connect={true}
+            audio={true}
+            video={true}
+            className="livekit-room"
+          >
+            <VideoConference />
+            <RoomAudioRenderer />
+          </LiveKitRoom>
+        </div>
       </div>
     )
   }
@@ -153,7 +158,7 @@ function VideoCallPage() {
   if (mode === 'select') {
     return (
       <div className="join-page">
-        <div className="join-card">
+        <div className="join-card video">
           <h1>📹 Video Call</h1>
           <div className="mode-selection">
             <button onClick={() => setMode('create')} className="mode-button">
@@ -172,7 +177,7 @@ function VideoCallPage() {
   if (mode === 'create') {
     return (
       <div className="join-page">
-        <div className="join-card">
+        <div className="join-card video">
           <h1>📹 Create Video Room</h1>
           
           {!roomUrl ? (
@@ -227,7 +232,7 @@ function VideoCallPage() {
   // Join room mode
   return (
     <div className="join-page">
-      <div className="join-card">
+      <div className="join-card video">
         <h1>📹 Join Video Call</h1>
         {currentRoomName && <p className="room-name-display">Room: {currentRoomName}</p>}
         <div className="form">

@@ -34,7 +34,10 @@ function App() {
       />
       <nav className="navbar">
         <div className="nav-container">
-          <Link to="/" className="nav-brand">StreamIT</Link>
+          <Link to="/" className="nav-brand">
+            <span className="stream">Stream</span>
+            <span className="it">IT</span>
+          </Link>
           <div className="nav-links">
             <Link to="/">Home</Link>
             <Link to="/audio-call">Audio Call</Link>
