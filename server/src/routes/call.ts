@@ -113,7 +113,7 @@ router.get("/room/:roomId", async (req: Request, res: Response) => {
 // Generate LiveKit token for joining a room
 router.post("/token", async (req: Request, res: Response) => {
   try {
-    const { roomId, participantName } = req.body;
+    const { roomId, participantName, expectedRoomType } = req.body;
 
     if (!roomId || !participantName) {
       return res.status(400).json({
@@ -141,6 +141,15 @@ router.post("/token", async (req: Request, res: Response) => {
     if (!room.isActive) {
       return res.status(403).json({
         error: "Room is no longer active",
+      });
+    }
+
+    // Validate room type matches expected type
+    if (expectedRoomType && room.roomType !== expectedRoomType) {
+      return res.status(400).json({
+        error: `This is a ${room.roomType} room. Please use the ${room.roomType} call page to join.`,
+        actualRoomType: room.roomType,
+        expectedRoomType,
       });
     }
 
