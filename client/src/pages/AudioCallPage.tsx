@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { LiveKitRoom, RoomAudioRenderer, useParticipants } from '@livekit/components-react'
+import { LiveKitRoom, RoomAudioRenderer, useParticipants, ControlBar } from '@livekit/components-react'
 import '@livekit/components-styles'
 import { createRoom, getRoomDetails, getCallToken } from '../lib/api'
 import './CallPage.css'
@@ -144,6 +144,7 @@ function AudioCallPage() {
           >
             <ParticipantList />
             <RoomAudioRenderer />
+            <ControlBar controls={{ microphone: true, screenShare: false, camera: false }} />
           </LiveKitRoom>
         </div>
       </div>
