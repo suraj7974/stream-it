@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import './HomePage.css'
+import { Link } from "react-router-dom";
+import "./HomePage.css";
 
 function HomePage() {
   return (
@@ -28,19 +28,8 @@ function HomePage() {
           </Link>
         </div>
       </div>
-
-      <div className="info-section">
-        <h3>Features</h3>
-        <ul>
-          <li>✅ High-quality audio calls</li>
-          <li>✅ HD video conferencing</li>
-          <li>✅ Screen sharing capability</li>
-          <li>✅ Multi-participant support</li>
-          <li>✅ 100% local deployment</li>
-        </ul>
-      </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

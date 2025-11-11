@@ -47,7 +47,7 @@ function VideoCallPage() {
 
         <LiveKitRoom
           token={token}
-          serverUrl={import.meta.env.VITE_LIVEKIT_URL}
+          serverUrl={import.meta.env.VITE_LIVEKIT_URL || 'ws://localhost:7880'}
           connect={true}
           audio={true}
           video={true}
