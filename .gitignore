@@ -5,4 +5,4 @@ dist
 *.log
 .vscode
 .idea
-DEPLOYMENT_GUIDE.md
+deployment/
