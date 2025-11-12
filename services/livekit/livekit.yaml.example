@@ -1,0 +1,21 @@
+port: 7880
+bind_addresses:
+  - 0.0.0.0
+
+rtc:
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
+  tcp_port: 7881
+  node_ip: YOUR_VM_PUBLIC_IP_HERE
+  
+keys:
+  devkey: secret
+
+logging:
+  level: info
+
+room:
+  auto_create: true
+  empty_timeout: 300
+  max_participants: 100

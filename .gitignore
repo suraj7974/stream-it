@@ -5,4 +5,8 @@ dist
 *.log
 .vscode
 .idea
-deployment/
+
+# Keep deployment configs but ignore actual env files
+services/livekit/livekit.yaml
+
+deployment/DEPLOYMENT_GUIDE.md
